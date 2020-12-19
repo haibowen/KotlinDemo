@@ -6,6 +6,11 @@ fun main() {
 
     println("hello")
 
+    var list: List<String> = listOf("appleshow", "pear", "bannashowshossho")
+    var sr = list.findMax {
+        it.length
+    }
+    println(sr)
     var button = Button()
     button.setOnclickListener {
 
@@ -34,7 +39,7 @@ fun main() {
         a + b
     }
     println(result.toString() + "这是测试")
-  
+
 
 }
 
@@ -52,4 +57,20 @@ fun plus(num1: Int, num2: Int): Int {
 fun delete(num1: Int, num2: Int): Int {
 
     return num1 - num2
+}
+
+
+fun <T, R : Comparable<R>> List<T>.findMax(block: (T) -> R): T? {
+    if (isEmpty()) return null
+    var maxElement: T = get(0)
+    var maxValue: R = block(maxElement)
+    for (element: T in this) {
+        var value: R = block(element)
+        if (value > maxValue) {
+            maxElement = element
+            maxValue = value
+        }
+    }
+    return maxElement
+
 }
